@@ -1,0 +1,53 @@
+name: Todo App CI/CD PIPELINE
+
+on:
+  push:
+    branch: [main]
+
+jobs:
+  build:
+    name: Build Phase
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/Checkout@v4
+
+      - name: Setup Node.jobs
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install dependencies
+        uses: npm Install
+
+      - name: Build application
+        run: npm run build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-files
+          path: dist/
+          retention-days: 1
+
+  test:
+    name: Build Phase
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/Checkout@v4
+
+      - name: Setup Node.jobs
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install dependencies
+        uses: npm install
+
+      - name: Run tests
+        run: npm run test
